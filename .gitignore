@@ -1,0 +1,8 @@
+build/
+.vscode/
+.idea/
+*.exe
+*.o
+*.obj
+data/*.csv
+!data/.gitkeep
