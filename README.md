@@ -1,111 +1,129 @@
-# Personal Finance Manager | C++17
+# Personal Finance Management System | C++
 
-A terminal-based personal finance application that tracks income and expenses, manages monthly category budgets, and generates financial summaries. Built with modern C++ and designed to demonstrate object-oriented programming, data validation, file persistence, and automated testing.
+## Project Overview
 
-## Features
+The Personal Finance Management System is a console-based application developed in C++17 that helps users manage their personal finances by tracking income, expenses, and monthly budgets. The program provides an organized way to record financial transactions, monitor spending habits, and generate financial summaries.
 
-- Add income and expense transactions with a date, category, and description
-- List transactions and delete entries by ID
-- View monthly or all-time income, spending, balance, and category breakdowns
-- Set monthly budgets and flag categories that exceed their limits
-- Automatically load saved data on startup and save data upon exit
-- Store data in human-readable CSV files, with support for commas and quotes in notes
-- Validate dates, positive input amounts, and monetary precision
-- Track money in integer cents to avoid floating-point rounding errors
+This project demonstrates practical applications of object-oriented programming, data structures, file handling, and algorithmic problem-solving in C++.
 
-## Technologies and concepts
+## Key Features
 
-- **Language:** C++17
-- **Build:** CMake 3.16+
-- **Libraries:** C++ Standard Library (`vector`, `map`, `filesystem`, streams)
-- **Testing:** Self-contained automated tests via CTest (no third-party dependency)
-- **Concepts:** encapsulation, separation of concerns, CSV serialization, input validation, aggregation
+- **Income and Expense Tracking:** Add financial transactions with dates, categories, amounts, and descriptions.
+- **Transaction Management:** View recorded transactions and delete entries when needed.
+- **Monthly Budgeting:** Create spending limits for different categories, such as groceries, transportation, and entertainment.
+- **Financial Reports:** Generate monthly or overall summaries showing total income, expenses, and remaining balance.
+- **Spending Analysis:** View expenses organized by category to better understand spending habits.
+- **Data Persistence:** Automatically load saved records when the application starts and save financial information to CSV files when exiting.
+- **Input Validation:** Prevent invalid dates, incorrect financial amounts, and incomplete transaction information.
 
-## Project structure
+## Technologies Used
 
-```text
-PersonalFinanceManager/
-├── CMakeLists.txt
-├── include/
-│   └── Finance.hpp         # Public data types and Ledger interface
-├── src/
-│   ├── Finance.cpp         # Business logic, summaries, CSV storage
-│   └── main.cpp            # Interactive terminal menu
-├── tests/
-│   └── test_finance.cpp    # Automated regression tests
-└── data/                   # Local CSV files (ignored by Git)
-```
+- **Programming Language:** C++17
+- **Build System:** CMake
+- **Libraries:** C++ Standard Library (STL)
+- **Data Storage:** CSV files
+- **Testing:** Automated C++ tests using CTest
+- **Programming Concepts:** Object-Oriented Programming, Encapsulation, Data Structures, File I/O, and Input Validation
 
-## Getting started
+## How the Program Works
 
-You need a C++17 compiler (GCC, Clang, or MSVC) and CMake 3.16 or newer.
+When the application starts, users interact with a menu-driven interface that provides several financial management options.
 
-From the project root:
+Users can:
+
+1. Add an income transaction.
+2. Add an expense transaction.
+3. View transaction history.
+4. Delete existing transactions.
+5. Generate monthly financial reports.
+6. View overall financial summaries.
+7. Set monthly spending budgets.
+8. Save their information and exit.
+
+The program processes transactions, calculates financial totals, and stores information locally for future use.
+
+## Project Structure
+
+- `main.cpp` – Handles the main application interface, user input, and menu navigation.
+- `Finance.cpp` – Implements financial calculations, transaction management, budgeting, and file storage.
+- `Finance.hpp` – Defines financial data structures and the Ledger class.
+- `test_finance.cpp` – Contains automated tests for financial calculations and application functionality.
+- `CMakeLists.txt` – Configures the C++ build process.
+
+## Technical Implementation
+
+The application uses a modular design that separates user interaction from financial processing.
+
+Financial records are managed through a Ledger class, which handles adding and deleting transactions, calculating financial summaries, and maintaining category budgets.
+
+The program uses standard C++ containers, including vectors and maps, to organize transaction records and spending categories.
+
+To improve accuracy, financial amounts are represented using integer cents instead of floating-point values, reducing the risk of rounding errors during calculations.
+
+CSV file handling allows transaction and budget information to remain available between application sessions.
+
+## How to Run the Project
+
+### Requirements
+
+- C++17-compatible compiler
+- CMake 3.16 or newer
+- Visual Studio Code or another C++ development environment
+
+### Build Instructions
+
+Open a terminal in the project directory and run:
 
 ```bash
 cmake -S . -B build
 cmake --build build
-ctest --test-dir build --output-on-failure
 ```
 
-**Run on Linux/macOS:**
+On Linux or macOS, run:
 
 ```bash
 ./build/finance_app
 ```
 
-**Run on Windows (PowerShell, common Visual Studio generator):**
+On Windows, using a Visual Studio CMake generator, run:
 
 ```powershell
 .\build\Debug\finance_app.exe
 ```
 
-With a single-configuration Windows generator such as MinGW Makefiles, the executable is typically `build\finance_app.exe`.
-
-The optional first command-line argument changes the data directory. For example:
+### Running Tests
 
 ```bash
-./build/finance_app my-private-finance-data
+ctest --test-dir build --output-on-failure
 ```
 
-## Example interaction
+## Skills Demonstrated
 
-```text
-Personal Finance Manager (amounts in CAD)
-1 Add income  2 Add expense  3 View transactions  4 Delete transaction
-5 Monthly report  6 Overall report  7 Set monthly budget  8 Save and exit
-Choose: 2
-Date (YYYY-MM-DD): 2026-10-05
-Category: Food
-Note: Groceries
-Amount (e.g. 19.99): 42.50
-Added transaction #1
-```
+Through this project, I applied several important software development concepts:
 
-Monthly reports compare spending against your budget for each category. For example, spending $125.00 against a $100.00 Food budget displays `OVER BUDGET`.
+- Object-oriented programming and encapsulation
+- C++ class design and modular programming
+- Data structures using vectors and maps
+- File handling and CSV data persistence
+- Error handling and input validation
+- Financial calculations and data aggregation
+- Automated software testing
+- Software organization using CMake
 
-## Storage and privacy
+## Future Improvements
 
-The program saves `transactions.csv` and `budgets.csv` inside the selected data directory. **Do not commit personal financial records.** The default `data/*.csv` files are excluded by `.gitignore`. There are no bank connections, credentials, cloud uploads, or external APIs.
+Potential enhancements include:
 
-This is an educational project, not a banking or financial-advice application. Currency is displayed as CAD; it does not convert exchange rates. Back up CSV files before experimenting with manual edits.
-
-## Possible next improvements
-
-- Recurring payments and scheduled transactions
-- CSV import/export with duplicate detection
-- Search, sort, and filter transactions
-- Unit test coverage for file corruption and larger datasets
-- A Qt desktop interface with charts
-
-## Resume description
-
-**Personal Finance Management System | C++17, CMake, STL**
-
-- Developed a console-based finance tracker with transaction management, monthly budgets, and category-based reporting.
-- Implemented CSV persistence, date and money validation, and integer-cent accounting to prevent floating-point rounding issues.
-- Structured the program into reusable C++ components and integrated automated regression tests through CMake/CTest.
+- Developing a graphical user interface using Qt
+- Adding financial charts and spending visualizations
+- Implementing recurring transactions
+- Providing advanced transaction filtering and searching
+- Supporting multiple user profiles
 
 ## Author
 
-Arber Aliu — Computer Science, Western University
+**Arber Aliu**  
+Computer Science Student  
+Western University
+
+*Developed to demonstrate C++ programming, object-oriented software design, and practical problem-solving skills.*
